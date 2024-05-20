@@ -1,6 +1,7 @@
 from ultralytics.utils.plotting import Annotator
 
 def get_colors():
+    # List of Defined Colors Used for BBOXES
     colors = colors_without_red_bgr = [
         (0, 0, 0),        # Black
         (128, 0, 0),      # Navy
