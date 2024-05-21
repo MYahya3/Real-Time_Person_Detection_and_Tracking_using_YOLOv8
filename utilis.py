@@ -3,7 +3,7 @@ import cv2
 import time
 
 class TrackProcessor:
-    def __init__(self, line_thickness=2, exclude_red=True):
+    def __init__(self, line_thickness=2, exclude_red=True, grace_period=5):
         self.line_thickness = line_thickness
         self.exclude_red = exclude_red
         self.colors = self.generate_bgr_colors()
@@ -11,12 +11,16 @@ class TrackProcessor:
         self.selected_track_id = None
         self.boxes = []
         self.track_ids = []
+        self.last_seen_frame = {}  # Keep track of the last frame each track ID was seen
+        self.grace_period = grace_period  # Number of frames to retain the box
     @staticmethod
     def generate_bgr_colors():
         """Generates a list of BGR colors, excluding shades of red if specified."""
         colors = [
             (0, 0, 0),  # Black
+            (150, 150, 100),
             (128, 0, 0),  # Navy
+            (128, 128, 0),
             (255, 0, 0),  # Blue
             (0, 255, 0),  # Green
             (128, 128, 0),  # Teal
@@ -41,9 +45,10 @@ class TrackProcessor:
                 if int(x1) <= x <= int(x2) and int(y1) <= y <= int(y2):
                     self.selected_track_id = self.track_ids[i]
                     self.start_time = time.time()
+                    self.last_seen_frame[self.selected_track_id] = param['frame_count']
                     print(f"Selected track ID: {self.selected_track_id}")
                     break
-    def process_draw_Boundboxes(self, image, tracks, classes_names=None):
+    def process_draw_Boundboxes(self, image, tracks,frame_count, classes_names=None):
         """Extracts and processes tracks for object counting in a video stream."""
 
         annotator = Annotator(image, line_width=self.line_thickness)
@@ -52,6 +57,10 @@ class TrackProcessor:
             self.boxes = tracks[0].boxes.xyxy.cpu()
             clss = tracks[0].boxes.cls.cpu().tolist()
             self.track_ids = tracks[0].boxes.id.int().cpu().tolist()
+
+            # Update the last seen frame for each track ID
+            for track_id in self.track_ids:
+                self.last_seen_frame[track_id] = frame_count
 
             # Extract tracks
             for box, track_id, cls in zip(self.boxes, self.track_ids, clss):
@@ -76,5 +85,12 @@ class TrackProcessor:
                     # Put the current time on top of the black rectangle
                     cv2.putText(image, f"Time-Tracker: {elapsed_time}sec", (15, 20),
                                 cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.7, (190, 215, 255), 1, cv2.LINE_AA)
-
         return image
+
+    def maintain_MisDetection(self, frame_count):
+        """Maintain the selected track ID if it's within the grace period."""
+        if self.selected_track_id is not None:
+            last_seen = self.last_seen_frame.get(self.selected_track_id, None)
+            if last_seen is None or (frame_count - last_seen) > self.grace_period:
+                self.selected_track_id = None
+                self.start_time = None
