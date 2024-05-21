@@ -43,7 +43,7 @@ class TrackProcessor:
                     self.start_time = time.time()
                     print(f"Selected track ID: {self.selected_track_id}")
                     break
-    def extract_and_process_tracks(self, image, tracks, classes_names=None):
+    def process_draw_Boundboxes(self, image, tracks, classes_names=None):
         """Extracts and processes tracks for object counting in a video stream."""
 
         annotator = Annotator(image, line_width=self.line_thickness)
