@@ -18,7 +18,7 @@ This project uses OpenCV to connect to an RTSP video stream, process object trac
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/object-tracking-timer.git](https://github.com/MYahya3/Real-Time_Person_Detection_and_Tracking_using_YOLOv8.git
+    git clone https://github.com/MYahya3/Real-Time_Person_Detection_and_Tracking_using_YOLOv8.git
     cd Real-Time_Person_Detection_and_Tracking_using_YOLOv8
     ```
 
