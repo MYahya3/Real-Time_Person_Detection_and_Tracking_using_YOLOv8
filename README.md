@@ -4,7 +4,7 @@ This project uses OpenCV to connect to an RTSP video stream, process object trac
 ## Features
 - Connect to an RTSP stream (e.g., from the IP Webcam app on Android).
 - Process object tracks and displays bounding boxes.
-- Click on a bounding box to select it, change it to Red and start a timer.
+- Click on a bounding box to select it, change it to Red, and start a timer.
 - Display the timer on the selected bounding box.
 - Maintain the selected bounding box for a specified grace period if detection is skipped.
 
@@ -57,5 +57,5 @@ This project uses OpenCV to connect to an RTSP video stream, process object trac
 ![Screenshot (80)](https://github.com/MYahya3/Real-Time_Person_Detection_and_Tracking_using_YOLOv8/assets/88489038/49b39111-ee28-419e-b3f6-2aa219b2824c)
 
 
-For any questions or issues, please contact [your-email@example.com](mailto:your-email@example.com).
+For any questions or issues, please contact [your-email@example.com](mailto:your-email@gmail.com).
 
