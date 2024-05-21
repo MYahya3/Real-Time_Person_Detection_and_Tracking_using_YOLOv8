@@ -10,7 +10,7 @@ try:
     rtsp_url = 'rtsp://192.168.100.4:8080/h264_ulaw.sdp'
     # cap = cv2.VideoCapture(rtsp_url)
     # For Test Sample Vidoe
-    cap = cv2.VideoCapture("video2.mp4")
+    cap = cv2.VideoCapture("input_video/sample.mp4")
 except:
     print("Retry to initiate your IP webcam")
     raise ConnectionError
@@ -48,7 +48,7 @@ while cap.isOpened():
     """Display frame."""
     cv2.imshow("Frame", frame)
     # Break Window
-    if cv2.waitKey(1) & 0xFF == ord("q"):
+    if cv2.waitKey(0) & 0xFF == ord("q"):
         break
 
 cap.release()
