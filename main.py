@@ -9,6 +9,7 @@ model = YOLO("yolov8n.pt")
 try:
     rtsp_url = 'rtsp://192.168.100.4:8080/h264_ulaw.sdp'
     cap = cv2.VideoCapture(rtsp_url)
+
     # For Test Sample Vidoe
     # cap = cv2.VideoCapture("input_video/sample.mp4")
 except:
