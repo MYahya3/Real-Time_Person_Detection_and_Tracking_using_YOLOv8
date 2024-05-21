@@ -48,7 +48,7 @@ while cap.isOpened():
     """Display frame."""
     cv2.imshow("Frame", frame)
     # Break Window
-    if cv2.waitKey(0) & 0xFF == ord("q"):
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
 cap.release()
