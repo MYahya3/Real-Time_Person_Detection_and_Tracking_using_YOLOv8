@@ -72,8 +72,9 @@ class TrackProcessor:
                 # Display the timer on the top left if a box is selected
                 if self.start_time is not None and self.selected_track_id == track_id:
                     elapsed_time = int(time.time() - self.start_time)
-                    # Put the current time on top
-                    cv2.putText(image, f"Time-Tracker: {elapsed_time}", (20, 20),
+                    cv2.rectangle(image, (0, 0), (200, 40), (22, 120, 110), -1)  # Rectangle dimensions and color
+                    # Put the current time on top of the black rectangle
+                    cv2.putText(image, f"Time-Tracker: {elapsed_time}sec", (15, 20),
                                 cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.7, (190, 215, 255), 1, cv2.LINE_AA)
 
         return image
