@@ -51,7 +51,7 @@ This project uses OpenCV to connect to an RTSP video stream, process object trac
 - `main_script.py`: Main script to capture RTSP stream, process frames, and display the video.
 - `utilis.py`: Contains the `TrackProcessor` class for handling track processing and timer functionality.
 - `README.md`: This file.
-### Results Viualis
+### Visualize Input and Output Result
 ![Screenshot (79)](https://github.com/MYahya3/Real-Time_Person_Detection_and_Tracking_using_YOLOv8/assets/88489038/5e2596a4-a69e-41a5-b871-8f2074c4f3fc)
 
 ![Screenshot (80)](https://github.com/MYahya3/Real-Time_Person_Detection_and_Tracking_using_YOLOv8/assets/88489038/49b39111-ee28-419e-b3f6-2aa219b2824c)
